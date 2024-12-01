@@ -23,7 +23,12 @@ const AdminLogin = ({ setIsAuthenticated }) => {
 
     try {
       // Send login request to the admin endpoint
-      const response = await axios.post(url, data);
+      const response = await axios.post(url, data, {
+        withCredentials: true, // Ensures cookies or other credentials are sent
+        headers: {
+          "Content-Type": "application/json", // Explicitly set content type
+        },
+      });
 
       if (response.data.success) {
         // Store token and set authentication state
